@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "module": "ES2015",
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
