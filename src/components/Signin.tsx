@@ -10,16 +10,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import React, { useState } from "react";
-import Logo from "@/assets/react.svg";
+import Logo from "/logo.png";
 import Google from "@/assets/google.svg";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
 // import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-// import Image from "next/image";
 import { useRef } from "react";
 import CheckRequest from "@/assets/Check.gif";
+import { ArrowLeft } from "lucide-react";
 // import { handleShowToast } from "@/utils";
 // import { toast } from "sonner";
 
@@ -30,6 +31,7 @@ const SignIn = () => {
   }
   const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState<FormDataInterface>({});
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   // const router = useRouter();
@@ -64,11 +66,20 @@ const SignIn = () => {
   }, [showPass]);
 
   return (
-    <div className="absolute font-montserrat py-[4rem] w-full h-fit top-0 bg-[#f6f5fe]">
-      <div className="w-full sm:w-[50%] lg:w-[38%] signinBox px-[1rem] py-[2rem] lg:py-[4rem] lg:px-[4rem] bg-white shadow border-gray-700 rounded-lg">
+    <div className="absolute flex font-montserrat w-full h-full top-0 z-20 bg-teal-100">
+      <div className="w-[90%] relative h-fit my-auto mx-auto sm:w-[50%] lg:w-[38%] px-[1rem] py-[2rem] lg:py-[4rem] lg:px-[4rem] bg-white md:shadow border-gray-700 rounded-lg">
+        <ArrowLeft
+          onClick={() => navigate(-1)}
+          className="relative bottom-4 right-8 cursor-pointer hover:text-destructive"
+        />
         <div className="flex justify-center items-center mb-8 gap-4">
-          <img src={Logo} alt="Logo" width="" height="" className="logo" />
-          <h2 className="text-base font-semibold letterSpacing">Sign In</h2>
+          <img
+            src={Logo}
+            alt="Logo"
+            width=""
+            height=""
+            className="w-[10rem] flex-shrink-0"
+          />
         </div>
 
         <form
@@ -129,13 +140,13 @@ const SignIn = () => {
                 name="remember_me"
                 className="rounded"
               />
-              <label htmlFor="remember_me" className="cursor-pointer">
+              <label htmlFor="remember_me" className="text-sm cursor-pointer">
                 Remember me
               </label>
             </div>
             <div
               onClick={() => handleShowToast("Feature Coming Soon...")}
-              className="forgotPass cursor-pointer"
+              className="forgotPass cursor-pointer  hover:text-teal-500 text-sm"
             >
               Forgot Password?
             </div>
@@ -143,7 +154,7 @@ const SignIn = () => {
           <button
             disabled={!(formData.username && formData.password)}
             // onClick={handleSubmit}
-            className="bg-[#752fed] py-3 text-white loginBtn w-full m-auto rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-teal-500 py-3 text-white font-medium w-full m-auto rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <img
@@ -156,7 +167,7 @@ const SignIn = () => {
           </button>
         </form>
 
-        <div className="text-center space-y-4 orText">Or</div>
+        <div className="text-center py-2 orText">Or</div>
 
         <button
           onClick={() => handleShowToast("Feature Coming Soon...")}
@@ -175,9 +186,9 @@ const SignIn = () => {
           </span>
         </button>
 
-        <div className="w-full text-sm font-medium text-gray-500 newAccText">
-          Don&apos;t Have a Account?
-          <Link to="/sign-up" className="forgotPass">
+        <div className="w-full mt-3 text-sm font-medium text-gray-500 newAccText">
+          Don&apos;t Have a Account?{" "}
+          <Link to="/signup" className="hover:text-teal-500">
             Sign Up
           </Link>
         </div>
