@@ -1,9 +1,10 @@
 const Quiz = require("../models/quiz.model");
+const User = require("../models/user.model");
 const { errorHandler } = require("../utils/error");
 
 async function uploadQuestion(req, res, next) {
   try {
-    const { images, question, answer, points, options } = req.body;
+    const { images, question, answer, options } = req.body;
     if (
       !Array.isArray(images) &&
       !Array.isArray(options) &&
@@ -15,8 +16,7 @@ async function uploadQuestion(req, res, next) {
         images.length > 0 &&
         options.length > 3 &&
         question &&
-        answer.length > 1 &&
-        points
+        answer.length > 1
       )
     ) {
       return next(
@@ -30,7 +30,6 @@ async function uploadQuestion(req, res, next) {
       images,
       question,
       answer,
-      points,
       options,
     });
     await newQuiz.save();
@@ -44,4 +43,47 @@ async function uploadQuestion(req, res, next) {
   }
 }
 
-module.exports = { uploadQuestion };
+async function ValidateAnswer(req, res, next) {
+  const { userId, quizId, answer } = req.body;
+  try {
+    const quizObj = Quiz.find({ _id: quizId });
+    if (!quizObj) {
+      return next(errorHandler(401, "Quiz not found!"));
+    }
+    let newPoints;
+    const isCorrect = quizObj.answer[0] === answer;
+    if (isCorrect) {
+      newPoints = 5;
+    } else {
+      newPoints = -1;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $inc: { points: points + 5 } },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return next(errorHandler(401, "Failed to update points"));
+    }
+    return res.status(200).json({
+      message: isCorrect ? "Correct Answer 🥳" : "Aw, it's okay 😉",
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getQuestions(req, res, next) {
+  try {
+    const data = await Quiz.find({});
+    return res.status(200).json({
+      message: "data fetched successfully!",
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { uploadQuestion, getQuestions, ValidateAnswer };

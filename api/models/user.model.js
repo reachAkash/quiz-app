@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema(
       default:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_s6R5SwncfI-013_hqyI2TJ29VNb5EGPdTw&s",
     },
+    points: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

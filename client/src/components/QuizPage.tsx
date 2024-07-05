@@ -1,34 +1,33 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import ReactFullpage from "@fullpage/react-fullpage";
-import Quiz1 from "./Quiz1";
+import Quiz from "./Quiz";
+import { useSelector } from "react-redux";
 
-const QuizPage = () => (
-  //
+const QuizPage = () => {
+  const { quizData } = useSelector((store: any) => store.quiz);
 
-  <ReactFullpage
-    credits={{ enabled: false, label: "" }}
-    scrollingSpeed={1500}
-    render={({ state, fullpageApi }) => (
-      <ReactFullpage.Wrapper>
-        <div className="section absolute top-4">
-          <Quiz1 fullpageApi={fullpageApi} />
-        </div>
-        <div className="section absolute top-4">
-          <Quiz1 fullpageApi={fullpageApi} />
-        </div>
-        <div className="section absolute top-4">
-          <Quiz1 fullpageApi={fullpageApi} />
-        </div>
-        <div className="section absolute top-4">
-          <Quiz1 fullpageApi={fullpageApi} />
-        </div>
-        <div className="section absolute top-4">
-          <Quiz1 fullpageApi={fullpageApi} />
-        </div>
-      </ReactFullpage.Wrapper>
-    )}
-  />
-);
+  return (
+    <ReactFullpage
+      credits={{ enabled: false, label: "" }}
+      scrollingSpeed={1500}
+      render={({ state, fullpageApi }) => (
+        <ReactFullpage.Wrapper>
+          {quizData.map((item: any, index) => {
+            return (
+              <div key={item?._id} className="section absolute top-4">
+                <Quiz
+                  data={item}
+                  dataLength={quizData?.length}
+                  index={index}
+                  fullpageApi={fullpageApi}
+                />
+              </div>
+            );
+          })}
+        </ReactFullpage.Wrapper>
+      )}
+    />
+  );
+};
 
 export default QuizPage;

@@ -13,7 +13,6 @@ import QuizPage from "./components/QuizPage";
 function App() {
   return (
     <BrowserRouter>
-      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />

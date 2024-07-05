@@ -18,10 +18,6 @@ const QuizSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    points: {
-      type: Number,
-      required: true,
-    },
   },
   { timestamps: true }
 );
