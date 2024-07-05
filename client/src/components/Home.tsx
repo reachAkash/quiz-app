@@ -12,6 +12,7 @@ import axiosInstance from "../../axiosConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuizData } from "@/redux/quiz/quizSlice";
 import Navbar from "./Navbar";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -28,10 +29,20 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="container pb-14 space-y-20 tablet:space-y-32">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        className="container pb-14 space-y-20 tablet:space-y-32"
+      >
         {/* section one */}
         <div className="flex flex-col tablet:flex-row items-center justify-between pt-14 tablet:pt-20">
-          <div className="flex-1 py-10 space-y-10">
+          <motion.div
+            initial={{ x: -50 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 2, ease: "easeIn" }}
+            className="flex-1 py-10 space-y-10"
+          >
             <h1 className="font-bold text-[2rem] tablet:text-[3rem] tracking-wide leading-tight">
               Daily Quiz, Daily <Wordbreak /> Bonus-Play Today
             </h1>
@@ -48,13 +59,23 @@ const Home = () => {
             >
               <CirclePlay /> Play Now
             </button>
-          </div>
-          <div className="flex-1 flex justify-end">
+          </motion.div>
+          <motion.div
+            initial={{ x: 50 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="flex-1 flex justify-end"
+          >
             <img className="w-[30rem]" src={Flag} alt="winner flag" />
-          </div>
+          </motion.div>
         </div>
         {/* section two */}
-        <div className="border tealShadow rounded-3xl flex flex-col tablet:flex-row gap-4 w-full">
+        <motion.div
+          initial={{ scale: 0.7 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="border tealShadow rounded-3xl flex flex-col tablet:flex-row gap-4 w-full"
+        >
           <div className="flex-1 flex flex-col items-center justify-center px-4 py-5 tablet:py-0 bg-teal-500 rounded-t-md tablet:rounded-s-3xl text-white space-y-2">
             <div className="text-3xl font-semibold text-center">
               Choose the option
@@ -100,20 +121,25 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
         {/* section three */}
         <div className="space-y-4">
-          <div className="space-y-2">
+          <motion.div
+            initial={{ opacity: 0.5 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="space-y-2"
+          >
             <div className="text-3xl font-semibold">
               Play, Learn and Earn Rewards
             </div>
             <p className="font-medium text-base tracking-wide leading-snug">
               Check yourself, Earn yourself!
             </p>
-          </div>
+          </motion.div>
           <Slider />
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

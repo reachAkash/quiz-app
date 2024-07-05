@@ -5,7 +5,7 @@ import Coin from "@/assets/coin.jpg";
 import Message from "@/assets/message.png";
 import Crown from "@/assets/crown.png";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { motion } from "framer-motion";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -37,7 +37,12 @@ export default () => {
       }}
     >
       <SwiperSlide>
-        <div className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4">
+        <motion.div
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.3, ease: "easeIn" }}
+          className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
+        >
           <img
             className="rounded-full mx-auto h-[10rem] w-[10rem]"
             src={Gift}
@@ -47,10 +52,15 @@ export default () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
             repellendus quaerat.
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4">
+        <motion.div
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ delay: 0.2, duration: 0.3, ease: "easeIn" }}
+          className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
+        >
           <img
             className="rounded-full mx-auto h-[10rem] w-[10rem]"
             src={Coin}
@@ -60,10 +70,15 @@ export default () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
             repellendus quaerat.
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4">
+        <motion.div
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ delay: 0.4, duration: 0.3, ease: "easeIn" }}
+          className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
+        >
           <img
             className="rounded-full mx-auto h-[10rem] w-[10rem]"
             src={Crown}
@@ -73,10 +88,15 @@ export default () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
             repellendus quaerat.
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4">
+        <motion.div
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.3, ease: "easeIn" }}
+          className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
+        >
           <img
             className="rounded-full mx-auto h-[10rem] w-[10rem]"
             src={Message}
@@ -86,10 +106,15 @@ export default () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
             repellendus quaerat.
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4">
+        <motion.div
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.3, ease: "easeIn" }}
+          className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
+        >
           <img
             className="rounded-full mx-auto h-[10rem] w-[10rem]"
             src={Gift}
@@ -99,10 +124,15 @@ export default () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
             repellendus quaerat.
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4">
+        <motion.div
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.3, ease: "easeIn" }}
+          className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
+        >
           <img
             className="rounded-full mx-auto h-[10rem] w-[10rem]"
             src={Coin}
@@ -112,10 +142,15 @@ export default () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
             repellendus quaerat.
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4">
+        <motion.div
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.3, ease: "easeIn" }}
+          className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
+        >
           <img
             className="rounded-full mx-auto h-[10rem] w-[10rem]"
             src={Crown}
@@ -125,7 +160,7 @@ export default () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
             repellendus quaerat.
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
     </Swiper>
   );
