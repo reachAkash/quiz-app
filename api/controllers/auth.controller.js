@@ -17,12 +17,12 @@ async function userAuthSignin(req, res, next) {
 
   try {
     const validUser = await User.findOne({ email });
-    if (!validateEmail) {
-      return next(401, "User not found!");
+    if (!validUser) {
+      return next(errorHandler(401, "User not found!"));
     }
     const validPassword = bcryptjs.compareSync(password, validUser.password);
-    if (validPassword) {
-      return next(401, "Incorrect Password!");
+    if (!validPassword) {
+      return next(errorHandler(401, "Incorrect Password!"));
     }
     const token = jwt.sign(
       {
