@@ -44,28 +44,16 @@ async function uploadQuestion(req, res, next) {
 }
 
 async function ValidateAnswer(req, res, next) {
-  const { userId, quizId, answer } = req.body;
+  const { quizId, answer } = req.body;
   try {
-    const quizObj = Quiz.find({ _id: quizId });
+    const quizObj = await Quiz.findOne({ _id: quizId });
     if (!quizObj) {
       return next(errorHandler(401, "Quiz not found!"));
     }
     let newPoints;
+    console.log(quizObj);
     const isCorrect = quizObj.answer[0] === answer;
-    if (isCorrect) {
-      newPoints = 5;
-    } else {
-      newPoints = -1;
-    }
 
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { $inc: { points: points + 5 } },
-      { new: true }
-    );
-    if (!updatedUser) {
-      return next(errorHandler(401, "Failed to update points"));
-    }
     return res.status(200).json({
       message: isCorrect ? "Correct Answer 🥳" : "Aw, it's okay 😉",
     });

@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.post("/quiz-upload", uploadQuestion);
 router.get("/getquiz", getQuestions);
-router.get("/validate-answer", ValidateAnswer);
+router.post("/validate-answer", ValidateAnswer);
 
 module.exports = router;
