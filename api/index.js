@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/auth.route");
+const QuizRoutes = require("./routes/quiz.route");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
@@ -23,6 +24,7 @@ mongoose
 
 //middleware to handle routes
 app.use("/api", userRoutes);
+app.use("/api", QuizRoutes);
 
 // middleware for handling errors
 app.use((error, req, res, next) => {

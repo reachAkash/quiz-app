@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
     profilepic: {
       type: String,
       default:
-        "https://static.wikia.nocookie.net/naruto/images/5/50/Team_Kakashi.png/revision/latest?cb=20161219035928",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_s6R5SwncfI-013_hqyI2TJ29VNb5EGPdTw&s",
     },
   },
   { timestamps: true }

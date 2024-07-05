@@ -58,16 +58,17 @@ async function userAuthSignup(req, res, next) {
       message: "Email is already taken!",
     });
   }
-  const validateNumber = await User.findOne({ number });
+  const convertNum = Number(number);
+  const validateNumber = await User.findOne({ number: convertNum });
   if (validateNumber) {
-    return res.status(401, "Number is already used!");
+    return next(errorHandler(401, "Number is already used!"));
   }
   const hashedPassword = bcryptjs.hashSync(password, 10);
   const newUser = new User({
     name,
     email,
     password: hashedPassword,
-    number,
+    number: convertNum,
   });
   try {
     await newUser.save();
