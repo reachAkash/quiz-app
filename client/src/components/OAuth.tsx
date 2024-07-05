@@ -5,8 +5,11 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
+import { useDispatch } from "react-redux";
+import { signInFailure, signInSuccess } from "@/redux/user/userSlice";
 
 const OAuth = () => {
+  const dispatch = useDispatch();
   const auth = getAuth(app);
   const navigate = useNavigate();
   const handleGoogleClick = async () => {
@@ -19,12 +22,14 @@ const OAuth = () => {
         email: resultsFromGoogle.user.email,
         profilepic: resultsFromGoogle.user.photoURL,
       });
-      if (data.statusText == "OK") {
+      if (data.statusText == "OK" || data.statusText == "Created") {
         navigate("/");
+        dispatch(signInSuccess(data.data.data));
+        handleShowToast("Welcome! 🥳");
       }
       console.log(data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      dispatch(signInFailure(err.response.data.message));
     }
   };
   const handleShowToast = (text: string) => {

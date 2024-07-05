@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import Logo from "/logo.png";
+import { useNavigate } from "react-router-dom";
 
 export function Sidebar() {
+  const navigate = useNavigate();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -36,12 +38,24 @@ export function Sidebar() {
           <div>Leaderboard</div>
         </div>
         <SheetFooter className="flex flex-col gap-2">
-          <Button type="submit" className="bg-teal-500">
-            Login
-          </Button>
-          <Button type="submit" className="bg-teal-500">
-            Register
-          </Button>
+          <SheetClose asChild>
+            <Button
+              onClick={() => navigate("/signin")}
+              type="submit"
+              className="bg-teal-500 hover:bg-teal-600"
+            >
+              Login
+            </Button>
+          </SheetClose>
+          <SheetClose asChild>
+            <Button
+              onClick={() => navigate("/signup")}
+              type="submit"
+              className="bg-teal-500 hover:bg-teal-600"
+            >
+              Register
+            </Button>
+          </SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>

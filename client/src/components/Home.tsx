@@ -7,8 +7,11 @@ import Crown from "@/assets/crown.png";
 import Wordbreak from "./Wordbreak";
 import { ArrowLeft, ArrowRight, CirclePlay } from "lucide-react";
 import Slider from "./Slider";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="container pb-14 space-y-20 tablet:space-y-32">
       {/* section one */}
@@ -24,7 +27,10 @@ const Home = () => {
             <Wordbreak />
             elit. Magnam, eveniet!{" "}
           </div>
-          <button className="flex items-center gap-1 cta  hover:scale-105 transition-all duration-300 ease-in-out bg-teal-500 text-white font-medium rounded-md px-4 py-2">
+          <button
+            onClick={() => navigate("/quiz")}
+            className="flex items-center gap-1 cta  hover:scale-105 transition-all duration-300 ease-in-out bg-teal-500 text-white font-medium rounded-md px-4 py-2"
+          >
             <CirclePlay /> Play Now
           </button>
         </div>

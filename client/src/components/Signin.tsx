@@ -8,27 +8,32 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef } from "react";
-import CheckRequest from "@/assets/Check.gif";
 import { ArrowLeft } from "lucide-react";
 import axiosInstance from "../../axiosConfig";
 import { toast } from "sonner";
 import OAuth from "./OAuth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "@/redux/user/userSlice";
 
 const SignIn = () => {
   interface FormDataInterface {
     email: string;
     password: string;
   }
-  // const error = useSelector(store=>store.10rem)
+  const dispatch = useDispatch();
   const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState<FormDataInterface>({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, error: errorMessage } = useSelector(
+    (state: any) => state.user
+  );
   const passRef = useRef<any>();
 
   const handleShowPass = () => {
@@ -47,12 +52,16 @@ const SignIn = () => {
       return;
     }
     try {
+      dispatch(signInStart());
       const data = await axiosInstance.post("/api/signin", formData);
       setFormData({ email: "", password: "" });
-      console.log(data);
-      handleShowToast("Welcome! 🥳");
+      if (data.statusText == "OK") {
+        dispatch(signInSuccess(data.data.data));
+        handleShowToast("Welcome! 🥳");
+        navigate("/");
+      }
     } catch (err) {
-      console.error(err);
+      dispatch(signInFailure(err.response.data));
     }
   };
 
@@ -76,14 +85,12 @@ const SignIn = () => {
     }
   }, [showPass]);
 
-  console.log(formData);
-
   return (
     <div className="absolute flex font-montserrat w-full h-full top-0 z-20 bg-teal-100">
       <div className="w-[90%] relative h-fit my-auto mx-auto sm:w-[50%] lg:w-[38%] px-[1rem] py-[2rem] lg:py-[4rem] lg:px-[4rem] bg-white md:shadow border-gray-700 rounded-lg">
         <ArrowLeft
           onClick={() => navigate(-1)}
-          className="relative bottom-4 right-8 cursor-pointer hover:text-destructive"
+          className="relative bottom-4 right-2 tablet:right-8 cursor-pointer hover:text-destructive"
         />
         <div className="flex justify-center items-center mb-8 gap-4">
           <img
@@ -115,7 +122,9 @@ const SignIn = () => {
               className="bg-gray-50 border-none focus:outline-none w-full rounded-md px-4 py-3"
               placeholder="Enter Your Email"
             />
-            {error && <span className="text-red-600 text-xs">{error}</span>}
+            {errorMessage && (
+              <span className="text-red-600 text-xs">{errorMessage}</span>
+            )}
           </div>
 
           <div className="space-y-4 relative">
@@ -172,14 +181,7 @@ const SignIn = () => {
             // onClick={handleSubmit}
             className="bg-teal-500 py-3 text-white font-medium w-full m-auto rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? (
-              <img
-                src={CheckRequest}
-                className="absolute w-10 left-[46%] bottom-1 mx-auto"
-              />
-            ) : (
-              "Sign Up"
-            )}
+            {loading ? "Loading..." : "Sign Up"}
           </button>
         </form>
 

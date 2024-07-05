@@ -110,3 +110,7 @@ html {
 .swiper-pagination-bullet-active {
   background-color: #14b8a6; /* Set the background color for active dots (optional) */
 }
+
+.fp-watermark {
+  display: none;
+}
