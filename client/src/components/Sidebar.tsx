@@ -17,7 +17,7 @@ export function Sidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">
+        <Button variant="primary">
           <Menu />
         </Button>
       </SheetTrigger>

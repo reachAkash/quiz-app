@@ -5,10 +5,9 @@ const jwt = require("jsonwebtoken");
 
 async function getData(req, res, next) {
   return res.status(201).json({
-    messsage: "Hello",
+    messsage: "working!",
   });
 }
-
 async function userAuthSignin(req, res, next) {
   const { email, password } = req.body;
   if (!email.trim()) return next(errorHandler(401, "Please Provide Email"));
@@ -79,6 +78,47 @@ async function userAuthSignup(req, res, next) {
     next(err);
   }
 }
-async function userAuthGoogle(req, res, next) {}
+async function userAuthGoogle(req, res, next) {
+  const { name, email, profilepic } = req.body;
+  try {
+    const validUser = await User.findOne({ email });
+    if (validUser) {
+      const token = jwt.sign(
+        {
+          id: validUser._id,
+        },
+        process.env.JWT_TOKEN,
+        { expiresIn: "1d" }
+      );
+      const { password, ...rest } = validUser._doc;
+      return res.status(200).cookie("access_token", token).json({
+        message: "user signed in successfully!",
+        data: rest,
+      });
+    } else {
+      const randomPass =
+        Math.random().toString(36).slice(-8) +
+        Math.random().toString(36).slice(-8);
+      const hashedPassword = bcryptjs.hashSync(randomPass, 10);
+      const newUser = new User({
+        name,
+        email,
+        profilepic,
+        password: hashedPassword,
+      });
+      await newUser.save();
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_TOKEN, {
+        expiresIn: "1d",
+      });
+      const { password, ...rest } = newUser._doc;
+      return res.status(200).json({
+        message: "user signed in successfully!",
+        data: rest,
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+}
 
 module.exports = { getData, userAuthGoogle, userAuthSignin, userAuthSignup };

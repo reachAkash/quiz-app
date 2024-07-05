@@ -2,7 +2,6 @@
 
 import React, { FormEvent, useState } from "react";
 import Logo from "/logo.png";
-import Google from "@/assets/google.svg";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -13,12 +12,15 @@ import CheckRequest from "@/assets/Check.gif";
 import { ArrowLeft } from "lucide-react";
 import axiosInstance from "../../axiosConfig";
 import { toast } from "sonner";
+import OAuth from "./OAuth";
+import { useSelector } from "react-redux";
 
 const SignIn = () => {
   interface FormDataInterface {
     email: string;
     password: string;
   }
+  // const error = useSelector(store=>store.10rem)
   const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState<FormDataInterface>({
     email: "",
@@ -183,22 +185,7 @@ const SignIn = () => {
 
         <div className="text-center py-2 orText">Or</div>
 
-        <button
-          onClick={() => handleShowToast("Feature Coming Soon...")}
-          type="button"
-          className="w-full flex items-center justify-center gap-2 py-2 rounded-md bg-gray-50 hover:bg-gray-100 border"
-        >
-          <img
-            src={Google}
-            alt="Google Logo"
-            width=""
-            height=""
-            className="w-6 h-6"
-          />
-          <span className="gsi-material-button-contents font-medium">
-            Google
-          </span>
-        </button>
+        <OAuth />
 
         <div className="w-full mt-3 text-sm font-medium text-gray-500 newAccText">
           Don&apos;t Have a Account?{" "}

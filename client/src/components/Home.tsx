@@ -10,14 +10,14 @@ import Slider from "./Slider";
 
 const Home = () => {
   return (
-    <div className="container pb-14 space-y-12">
+    <div className="container pb-14 space-y-20 tablet:space-y-32">
       {/* section one */}
-      <div className="flex flex-col tablet:flex-row items-center justify-between">
-        <div className="flex-1 py-10 space-y-6">
-          <h1 className="font-bold text-2xl tablet:text-5xl tracking-wide leading-tight">
+      <div className="flex flex-col tablet:flex-row items-center justify-between pt-14 tablet:pt-20">
+        <div className="flex-1 py-10 space-y-10">
+          <h1 className="font-bold text-[2rem] tablet:text-[3rem] tracking-wide leading-tight">
             Daily Quiz, Daily <Wordbreak /> Bonus-Play Today
           </h1>
-          <div className="font-medium text-base tracking-wide leading-snug">
+          <div className="font-medium text-[1rem] tracking-wide leading-normal">
             Mentoons is a daily quiz platform, grab cool prizes and exciting{" "}
             <Wordbreak />
             points everyday. Lorem ipsum dolor sit amet consectetur adipisicing{" "}

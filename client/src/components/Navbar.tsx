@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="container py-2 sticky top-0 z-10 glassBg flex justify-between items-center">
-      <div className="">
+      <Link to="/" className="">
         <img
           className="cursor-pointer w-[10rem] flex-shrink-0"
           src={Logo}
           alt="logo"
         />
-      </div>
+      </Link>
       {/* for large device */}
       <div className="hidden tablet:flex">
         <NavigationMenuComp />
