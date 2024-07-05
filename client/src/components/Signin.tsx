@@ -1,40 +1,32 @@
 "use client";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Logo from "/logo.png";
 import Google from "@/assets/google.svg";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
-// import { useRouter } from "next/navigation";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef } from "react";
 import CheckRequest from "@/assets/Check.gif";
 import { ArrowLeft } from "lucide-react";
-// import { handleShowToast } from "@/utils";
-// import { toast } from "sonner";
+import axiosInstance from "../../axiosConfig";
+import { toast } from "sonner";
 
 const SignIn = () => {
   interface FormDataInterface {
-    username?: string;
-    password?: string | number;
+    email: string;
+    password: string;
   }
   const [showPass, setShowPass] = useState(false);
-  const [formData, setFormData] = useState<FormDataInterface>({});
+  const [formData, setFormData] = useState<FormDataInterface>({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const router = useRouter();
   const passRef = useRef<any>();
 
   const handleShowPass = () => {
@@ -42,15 +34,32 @@ const SignIn = () => {
   };
 
   const handleChange = (e) => {
+    if (e.target.value == " ") return;
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleShowToast = (text) => {
-    // toast(
-    //   <span className="text-purple-700 text-lg font-semibold font-montserrat">
-    //     {text}
-    //   </span>
-    // );
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!(formData.email.trim() && formData.password.trim())) {
+      handleShowToast("kindly fill both name & password!");
+      return;
+    }
+    try {
+      const data = await axiosInstance.post("/api/signin", formData);
+      setFormData({ email: "", password: "" });
+      console.log(data);
+      handleShowToast("Welcome! 🥳");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleShowToast = (text: string) => {
+    toast(
+      <span className="text-teal-500 font-semibold font-montserrat">
+        {text}
+      </span>
+    );
   };
 
   useEffect(() => {
@@ -64,6 +73,8 @@ const SignIn = () => {
       passRef.current.type = "password";
     }
   }, [showPass]);
+
+  console.log(formData);
 
   return (
     <div className="absolute flex font-montserrat w-full h-full top-0 z-20 bg-teal-100">
@@ -83,23 +94,24 @@ const SignIn = () => {
         </div>
 
         <form
-          onSubmit={() => console.log("first")}
+          onSubmit={(e) => handleSubmit(e)}
           className="space-y-6"
           action=""
           method="POST"
         >
           <div className="space-y-4">
-            <label htmlFor="username" className="block labelText">
-              Username
+            <label htmlFor="email" className="block labelText">
+              Email
             </label>
             <input
               onChange={handleChange}
-              type="text"
-              id="username"
-              name="username"
+              value={formData.email}
+              type="email"
+              id="email"
+              name="email"
               autoFocus
               className="bg-gray-50 border-none focus:outline-none w-full rounded-md px-4 py-3"
-              placeholder="Enter Your username"
+              placeholder="Enter Your Email"
             />
             {error && <span className="text-red-600 text-xs">{error}</span>}
           </div>
@@ -110,6 +122,7 @@ const SignIn = () => {
             </label>
             <div className="flex justify-between items-center bg-gray-50 px-4 py-3 rounded-md">
               <input
+                value={formData.password}
                 onChange={handleChange}
                 ref={passRef}
                 type="password"
@@ -135,6 +148,7 @@ const SignIn = () => {
           <div className="flex items-center justify-between">
             <div className="space-x-1 flex items-center">
               <input
+                onChange={() => handleShowToast("Feature coming soon!")}
                 type="checkbox"
                 id="remember_me"
                 name="remember_me"
@@ -152,7 +166,7 @@ const SignIn = () => {
             </div>
           </div>
           <button
-            disabled={!(formData.username && formData.password)}
+            disabled={!(formData.email && formData.password)}
             // onClick={handleSubmit}
             className="bg-teal-500 py-3 text-white font-medium w-full m-auto rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -172,7 +186,7 @@ const SignIn = () => {
         <button
           onClick={() => handleShowToast("Feature Coming Soon...")}
           type="button"
-          className="w-full flex items-center justify-center gap-2 py-2 rounded-md bg-gray-100 hover:bg-gray-200 border"
+          className="w-full flex items-center justify-center gap-2 py-2 rounded-md bg-gray-50 hover:bg-gray-100 border"
         >
           <img
             src={Google}

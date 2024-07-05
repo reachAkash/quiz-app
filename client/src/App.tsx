@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import SignIn from "./components/Signin";
 import Review from "./components/Review";
+import { Toaster } from "sonner";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/review" element={<Review />} />
       </Routes>
+      <Toaster />
     </>
   );
 }
