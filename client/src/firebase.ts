@@ -2,10 +2,9 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC1rnORGqBY_JURsUDyq4_pjSBeMR6Ffjk",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "quiz-app-akash.firebaseapp.com",
   projectId: "quiz-app-akash",
   storageBucket: "quiz-app-akash.appspot.com",
