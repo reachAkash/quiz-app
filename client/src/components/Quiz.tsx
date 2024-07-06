@@ -356,7 +356,7 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
                   setAnswer(item);
                   setActiveBox(item);
                 }}
-                className={`${backgroundColor} border flex items-center gap-4 group hover:border-teal-500 hover:bg-teal-50 max-w-lg rounded-md mx-auto px-4 py-3 ${
+                className={`${backgroundColor} border flex items-center gap-4 group laptop:hover:border-teal-500 laptop:hover:bg-teal-50 max-w-lg rounded-md mx-auto px-4 py-3 ${
                   answer && "pointer-events-none cursor-not-allowed"
                 }`}
               >
@@ -367,7 +367,7 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
                   id={`option${index}${i}`}
                 />{" "}
                 <label
-                  className="font-medium cursor-pointer w-full group-hover:text-teal-500 flex items-center justify-between"
+                  className="font-medium cursor-pointer w-full laptop:group-hover:text-teal-500 flex items-center justify-between"
                   htmlFor={`option${index}${i}`}
                 >
                   {item}
