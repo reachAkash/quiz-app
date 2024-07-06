@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setQuizData } from "@/redux/quiz/quizSlice";
 import Navbar from "./Navbar";
 import { motion } from "framer-motion";
+import { resetStates } from "@/redux/user/userSlice";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -23,8 +24,13 @@ const Home = () => {
     dispatch(setQuizData(data.data.data));
   };
 
+  const resetStatesFunc = () => {
+    dispatch(resetStates());
+  };
+
   useEffect(() => {
     getQuizData();
+    resetStatesFunc();
   }, []);
 
   return (

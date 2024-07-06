@@ -22,7 +22,7 @@ const OAuth = () => {
         email: resultsFromGoogle.user.email,
         profilepic: resultsFromGoogle.user.photoURL,
       });
-      if (data.statusText == "OK" || data.statusText == "Created") {
+      if (data.status == 200 || data.statusText == "Created") {
         navigate("/");
         dispatch(signInSuccess(data.data.data));
         handleShowToast("Welcome! 🥳");
