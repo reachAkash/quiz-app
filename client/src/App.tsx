@@ -25,7 +25,8 @@ function App() {
         </Route>
         <Route path="*" element={<Notfound />} />
       </Routes>
-      <Toaster position="top-right" />
+      <Toaster className="hidden tablet:flex" />
+      <Toaster className="flex tablet:hidden" position="top-right" />
     </BrowserRouter>
   );
 }
