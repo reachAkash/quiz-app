@@ -8,7 +8,7 @@ require("dotenv").config();
 
 // resolving cors
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://quiz-app-akash.vercel.app/"],
+  origin: ["http://localhost:5173", "https://quiz-frontend-akash.vercel.app"],
   optionsSuccessStatus: 200,
   credentials: true,
 };
