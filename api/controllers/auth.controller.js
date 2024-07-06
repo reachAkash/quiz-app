@@ -47,10 +47,12 @@ async function userAuthSignin(req, res, next) {
 }
 async function userAuthSignup(req, res, next) {
   const { email, name, password, number } = req.body;
-  if (!email) next(errorHandler(401, "Please Provide Valid Email"));
-  else if (!name) next(errorHandler(401, "Please Provide Name"));
-  else if (!password) next(errorHandler(401, "Please Provide Valid Password"));
-  else if (!number) next(errorHandler(401, "Please Provide Valid Number"));
+  if (!email) return next(errorHandler(401, "Please Provide Valid Email"));
+  else if (!name) return next(errorHandler(401, "Please Provide Name"));
+  else if (!password)
+    return next(errorHandler(401, "Please Provide Valid Password"));
+  else if (!number || isNaN(number))
+    return next(errorHandler(401, "Please Provide Valid Number"));
 
   const validateEmail = await User.findOne({ email });
   if (validateEmail) {

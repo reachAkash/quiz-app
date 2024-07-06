@@ -55,7 +55,8 @@ const SignIn = () => {
       dispatch(signInStart());
       const data = await axiosInstance.post("/api/signin", formData);
       setFormData({ email: "", password: "" });
-      if (data.statusText == "OK") {
+      console.log(data);
+      if (data.status == 200 || data.statusText == "OK") {
         dispatch(signInSuccess(data.data.data));
         handleShowToast("Welcome! 🥳");
         navigate("/");

@@ -59,14 +59,14 @@ const SignIn = () => {
       dispatch(signInStart());
       const data = await axiosInstance.post("/api/signup", formData);
       setFormData({ email: "", password: "", name: "", number: "" });
-      if (data.statusText == "OK" || data.statusText == "Created") {
-        navigate("/");
+      if (data.status == 201 || data.statusText == "Created") {
+        navigate("/signin");
         dispatch(signInSuccess(data.data.data));
         handleShowToast("Welcome! 🥳");
       }
       console.log(data);
     } catch (err) {
-      dispatch(signInFailure(err.response.data.message));
+      dispatch(signInFailure(err.response.data.message || err.response.data));
     }
   };
 
