@@ -90,7 +90,7 @@ const Review = ({ fullpageApi, data, dataLength, index }) => {
               <span className="text-sm font-semibold">More Info</span>
               <BsInfoCircleFill className="text-xl text-white" />
             </PopoverTrigger>
-            <PopoverContent className="bg-white max-w-lg shadow-xl px-4 py-6 space-y-2">
+            <PopoverContent className="bg-white max-w-sm tablet:max-w-lg shadow-xl px-4 py-6 space-y-2">
               <div className="font-semibold text-sm underline">
                 Brief Description :
               </div>
