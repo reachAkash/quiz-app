@@ -3,7 +3,7 @@ import ReactFullpage from "@fullpage/react-fullpage";
 import { useSelector } from "react-redux";
 import Review from "./Review";
 
-const ReviewPage = () => {
+const QuizPage = () => {
   const { quizData } = useSelector((store: any) => store.quiz);
 
   return (
@@ -30,4 +30,4 @@ const ReviewPage = () => {
   );
 };
 
-export default ReviewPage;
+export default QuizPage;

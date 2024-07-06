@@ -1,8 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
-  return;
+  const { currentUser } = useSelector((store: any) => store.user);
+  return currentUser ? <Outlet /> : <Navigate to="/signin" />;
 };
 
 export default ProtectedRoute;

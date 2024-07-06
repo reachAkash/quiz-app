@@ -15,9 +15,12 @@ const quizSlice = createSlice({
     setPoints: (state, action) => {
       state.points = action.payload;
     },
+    restartQuiz: (state) => {
+      state.points = 0;
+    },
   },
 });
 
-export const { setQuizData, setPoints } = quizSlice.actions;
+export const { setQuizData, setPoints, restartQuiz } = quizSlice.actions;
 
 export default quizSlice.reducer;

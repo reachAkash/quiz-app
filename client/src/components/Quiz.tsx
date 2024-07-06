@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axiosInstance from "../../axiosConfig";
 import { toast } from "sonner";
-import { setPoints } from "@/redux/quiz/quizSlice";
+import { restartQuiz, setPoints } from "@/redux/quiz/quizSlice";
 import { BsInfoCircleFill } from "react-icons/bs";
+import { Check } from "lucide-react";
+import { CircleX } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -55,11 +57,19 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
     }
   };
 
+  const resetPoints = () => {
+    dispatch(restartQuiz());
+  };
+
   useEffect(() => {
     if (answer) {
       checkAnswer();
     }
   }, [answer]);
+
+  useEffect(() => {
+    resetPoints();
+  }, []);
 
   return (
     <div className="flex flex-col tablet:flex-row h-[100vh] px-4 py-8">
@@ -70,9 +80,14 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
         className="flex-1 flex flex-col space-y-6 justify-between h-full border border-teal-500 rounded-t-2xl tablet:rounded-s-2xl tablet:rounded-t-none bg-teal-500 py-8 px-6"
       >
         <div className="flex items-center justify-between">
-          <div onClick={() => navigate(-1)} className="flex items-center gap-2">
-            <ArrowLeft className="text-white" />
-            <span className="underline text-white">Homepage</span>
+          <div
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2 cursor-pointer group "
+          >
+            <ArrowLeft className="text-white group-hover:font-medium transition-all duration-300 ease-in-out" />
+            <span className="underline text-white group-hover:font-medium transition-all duration-300 ease-in-out">
+              Homepage
+            </span>
           </div>
           <Popover>
             <PopoverTrigger>
@@ -80,7 +95,7 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
             </PopoverTrigger>
             <PopoverContent className="bg-white shadow-xl px-4 py-6 ">
               <div className="font-semibold text-sm underline">Rules : </div>
-              <div className="space-y-1 py-2">
+              <div className=" border rounded-md px-2 space-y-2 py-4">
                 <div className="text-gray-700 font-medium text-sm">
                   +5 Points for correct answers
                 </div>
@@ -105,7 +120,7 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
         <div className="text-lg text-white font-medium">Score : {points}</div>
       </motion.div>
       <motion.div className="flex-[2] h-full flex flex-col border border-teal-500 rounded-b-2xl tablet:rounded-e-2xl tablet:rounded-b-none items-center justify-between py-8 px-6 space-y-4">
-        <div className="flex overflow-x-auto tablet:overflow-hidden items-center justify-between gap-8">
+        <div className="flex overflow-x-auto laptop:overflow-hidden items-center justify-between gap-8">
           {data?.images?.map((item: string) => (
             <motion.img
               initial={{ scale: 1.1 }}
@@ -141,12 +156,18 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
                   answer && "pointer-events-none cursor-not-allowed"
                 }`}
               >
-                <input type="radio" name="quiz" id={`option${index}${i}`} />{" "}
+                <input
+                  disabled={answer != ""}
+                  type="radio"
+                  name="quiz"
+                  id={`option${index}${i}`}
+                />{" "}
                 <label
-                  className="font-medium cursor-pointer w-full group-hover:text-teal-500"
+                  className="font-medium cursor-pointer w-full group-hover:text-teal-500 flex items-center justify-between"
                   htmlFor={`option${index}${i}`}
                 >
                   {item}
+                  {answer === item ? correct ? <Check /> : <CircleX /> : ""}
                 </label>
               </motion.div>
             );

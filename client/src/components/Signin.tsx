@@ -159,13 +159,16 @@ const SignIn = () => {
           <div className="flex items-center justify-between">
             <div className="space-x-1 flex items-center">
               <input
-                onChange={() => handleShowToast("Feature coming soon!")}
                 type="checkbox"
+                checked
                 id="remember_me"
                 name="remember_me"
-                className="rounded"
+                className="rounded disabled cursor-not-allowed"
               />
-              <label htmlFor="remember_me" className="text-sm cursor-pointer">
+              <label
+                htmlFor="remember_me"
+                className="text-sm cursor-not-allowed"
+              >
                 Remember me
               </label>
             </div>

@@ -38,7 +38,7 @@ export default () => {
     >
       <SwiperSlide>
         <motion.div
-          initial={{ y: 50 }}
+          initial={{ y: 40 }}
           whileInView={{ y: 0 }}
           transition={{ duration: 0.3, ease: "easeIn" }}
           className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
@@ -56,7 +56,7 @@ export default () => {
       </SwiperSlide>
       <SwiperSlide>
         <motion.div
-          initial={{ y: 50 }}
+          initial={{ y: 40 }}
           whileInView={{ y: 0 }}
           transition={{ delay: 0.2, duration: 0.3, ease: "easeIn" }}
           className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
@@ -74,7 +74,7 @@ export default () => {
       </SwiperSlide>
       <SwiperSlide>
         <motion.div
-          initial={{ y: 50 }}
+          initial={{ y: 40 }}
           whileInView={{ y: 0 }}
           transition={{ delay: 0.4, duration: 0.3, ease: "easeIn" }}
           className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
@@ -92,7 +92,7 @@ export default () => {
       </SwiperSlide>
       <SwiperSlide>
         <motion.div
-          initial={{ y: 50 }}
+          initial={{ y: 30 }}
           whileInView={{ y: 0 }}
           transition={{ duration: 0.3, ease: "easeIn" }}
           className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
@@ -110,7 +110,7 @@ export default () => {
       </SwiperSlide>
       <SwiperSlide>
         <motion.div
-          initial={{ y: 50 }}
+          initial={{ y: 30 }}
           whileInView={{ y: 0 }}
           transition={{ duration: 0.3, ease: "easeIn" }}
           className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
@@ -128,7 +128,7 @@ export default () => {
       </SwiperSlide>
       <SwiperSlide>
         <motion.div
-          initial={{ y: 50 }}
+          initial={{ y: 30 }}
           whileInView={{ y: 0 }}
           transition={{ duration: 0.3, ease: "easeIn" }}
           className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"
@@ -146,7 +146,7 @@ export default () => {
       </SwiperSlide>
       <SwiperSlide>
         <motion.div
-          initial={{ y: 50 }}
+          initial={{ y: 30 }}
           whileInView={{ y: 0 }}
           transition={{ duration: 0.3, ease: "easeIn" }}
           className="bg-teal-500 text-center rounded-2xl text-white py-8 px-4 space-y-4"

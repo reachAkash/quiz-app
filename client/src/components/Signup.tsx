@@ -202,11 +202,15 @@ const SignIn = () => {
             <div className="space-x-1 flex items-center">
               <input
                 type="checkbox"
+                checked
                 id="remember_me"
                 name="remember_me"
-                className="rounded"
+                className="rounded disabled cursor-not-allowed"
               />
-              <label htmlFor="remember_me" className="text-sm cursor-pointer">
+              <label
+                htmlFor="remember_me"
+                className="text-sm cursor-not-allowed"
+              >
                 Remember me
               </label>
             </div>
