@@ -3,7 +3,7 @@ import { config } from "process";
 
 const productionUrl = "https://quiz-backend-akash.vercel.app";
 const developmentUrl = "http://localhost:3000";
-const production = false;
+const production = true;
 const axiosInstance = axios.create({
   baseURL: production ? productionUrl : developmentUrl,
   timeout: 10000,
