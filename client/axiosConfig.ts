@@ -1,7 +1,7 @@
 import axios from "axios";
 import { config } from "process";
 
-const productionUrl = "https://quiz-app-akash.vercel.app";
+const productionUrl = "https://quiz-backend-akash.vercel.app";
 const developmentUrl = "http://localhost:3000";
 const production = false;
 const axiosInstance = axios.create({

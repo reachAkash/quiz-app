@@ -31,7 +31,7 @@ const Quiz = ({ fullpageApi, data, dataLength, index }) => {
   };
 
   const checkAnswer = async () => {
-    "use client";
+    "use server";
     try {
       if (answer.trim() != "") {
         const validateAnswer = await axiosInstance.post(

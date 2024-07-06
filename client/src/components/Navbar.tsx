@@ -58,8 +58,8 @@ const Navbar = () => {
               alt="profilePic"
             />
           </PopoverTrigger>
-          <PopoverContent className="py-6 ">
-            <div className="space-y-1 py-2">
+          <PopoverContent className="py-6 space-y-1">
+            <div className="space-y-1 py-2 px-2 bg-secondary ">
               <div className="text-teal-500 text-sm">{currentUser?.name}</div>
               <div className="text-teal-500 text-sm">{currentUser?.email}</div>
             </div>

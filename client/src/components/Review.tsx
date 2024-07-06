@@ -5,12 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import axiosInstance from "../../axiosConfig";
 import { toast } from "sonner";
 import { setPoints } from "@/redux/quiz/quizSlice";
-import { BsInfoCircleFill } from "react-icons/bs";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@radix-ui/react-popover";
 import { motion } from "framer-motion";
 
 const Review = ({ fullpageApi, data, dataLength, index }) => {
@@ -31,7 +25,7 @@ const Review = ({ fullpageApi, data, dataLength, index }) => {
   };
 
   const checkAnswer = async () => {
-    "use client";
+    "use server";
     try {
       if (answer.trim() != "") {
         const validateAnswer = await axiosInstance.post(

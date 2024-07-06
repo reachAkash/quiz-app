@@ -5,10 +5,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import SignIn from "./components/Signin";
-import Review from "./components/Review";
 import { Toaster } from "sonner";
 import Notfound from "./components/Notfound";
 import QuizPage from "./components/QuizPage";
+import ReviewPage from "./components/ReviewPage";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/review" element={<Review />} />
+        <Route path="/review" element={<ReviewPage />} />
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
